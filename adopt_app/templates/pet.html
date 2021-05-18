@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>View Job</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/add_pet">Add a Pet</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        <div class="pet_content">
+            <div class="pet_photo">
+                <h3 class="pet">{{pet.name}}</h3>
+                <img src="{{pet.photo.url}}" width="200">
+                <p>Status: {{pet.status}}</p>
+            </div>
+            <div class="pet_info">
+                <p>Animal: {{pet.animal}}</p>
+                <p>Age: {{pet.age}}</p>
+                <p>Sex: {{pet.sex}}</p>
+                <p>City: {{pet.pet_city}}</p>
+                <p>State: {{pet.pet_state}}</p>
+                <p>Zip Code: {{pet.pet_zip_code}}</p>
+                <p>Affiliation: {{pet.pet_affiliation}}</p>
+                <p>Description: {{pet.description}}</p>
+                <p>Pet Added On: {{pet.created_at}}</p>
+                <button class="btn btn-light"><a href="/pets/adopt/{{pet.id}}">Adopt Me!</a></button>
+                <br><br>
+                <a href="/favorite/{{pet.id}}">Favorite</a>
+                {% if pet in logged_user.creator.all %}
+                    | <a href="/pets/edit/{{pet.id}}">Edit</a> | <a href="/delete_pet/{{pet.id}}">Delete</a>
+                {% endif %}
+        </div>
+</div>
+</body>
+</html>

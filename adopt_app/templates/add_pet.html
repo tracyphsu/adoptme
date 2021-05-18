@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add a Pet</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/add_pet">Add a Pet</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">    
+            <form action="/newpet" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <h1 class="title">Add a Pet</h1>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" class="form-control">
+                <label for="animal">Animal: </label>
+                <select id="animal" name="animal" class="form-control">
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="rabbit">Rabbit</option>
+                    <option value="bird">Bird</option>
+                </select>
+                <label for="age">Age:</label>
+                <input type="text" name="age" class="form-control">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" class="form-control">
+                    <option value="Male">M</option>
+                    <option value="Female">F</option>
+                </select>
+                <label for="pet_city">City:</label>
+                <input type="text" name="pet_city" class="form-control">
+                <label for="pet_state">State:</label>
+                <input type="text" name="pet_state" class="form-control">
+                <label for="pet_zip_code">Zip Code:</label>
+                <input type="text" name="pet_zip_code" class="form-control">
+                <label for="pet_affiliation">Affiliation:</label>
+                <input type="text" name="pet_affiliation" class="form-control">
+                <label for="description">Description:</label>
+                <input type="textarea" name="description" class="form-control">
+                <label for="photo">Photo:</label>
+                <input type="file" name="photo">
+                <br>
+                <label for="status">Status:</label>
+                <select id="status" name="status" class="form-control">
+                    <option value="Available">Available</option>
+                    <option value="Adopted">Adopted</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Foster">Need Foster</option>
+                    <option value="At a Kill Shelter">At a Kill Shelter</option>
+                </select>
+            </div> 
+            <div class="buttons">
+                <button type="button" id="button_link" class="btn btn-light"><a href="/dashboard">Cancel</a></button>       
+                <input class="btn btn-light" type="submit" value="Submit">
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

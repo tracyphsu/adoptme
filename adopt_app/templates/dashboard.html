@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adopt Me</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/add_pet">Add a Pet</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h5>Featured Pets:</h5>
+            <div class="featured">
+                {% for pet in feature %}
+                    <div class="feature_pet">
+                        <a href="/pets/{{pet.id}}"><img src="{{pet.photo.url}}" width="200"></a>
+                        <p>Pet Status: {{pet.status}}</p>
+                        <p>{{pet.name}} has been at the shelter since {{pet.created_at}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <h5>Favorited Pets:</h5>
+            <div class="fav d-flex justify-content-start">
+                {% for pet in logged_user.fav_pets.all %}
+                    <div class="pets">
+                        <a href="/pets/{{pet.id}}"><img src="{{ pet.photo.url }}" width="100"></a>
+                        <p>{{pet.name}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <h5>Available Pets:</h5>
+            <div class="available d-flex justify-content-around">
+                {% for pet in status.all %}
+                <div class="pets">
+                    <a href="/pets/{{pet.id}}"><img src="{{ pet.photo.url }}" width="100"></a>
+                    <p>{{pet.name}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

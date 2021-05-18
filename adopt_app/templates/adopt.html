@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add a Pet</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/add_pet">Add a Pet</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+            <div id="border" class="d-flex justify-content-center align-items-center container">    
+                <form action="/adopt_pet/{{pet.id}}" method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <h1>Adopt {{pet.name}}!</h1>
+                <div class="form-group">
+                    <label for="adopt_fname">First Name:</label>
+                    <input type="text" name="adopt_fname" class="form-control" value="{{logged_user.first_name}}">
+                    <label for="adopt_lname">Last Name: </label>
+                    <input type="text" name="adopt_lname" class="form-control" value="{{logged_user.last_name}}">
+                    <label for="adopt_email">Email:</label>
+                    <input type="text" name="adopt_email" class="form-control" value="{{logged_user.user_email}}">
+                    <label for="adopt_address">Address:</label>
+                    <input type="text" name="adopt_address" class="form-control" value="{{logged_user.user_address}}">
+                    <label for="adopt_city">City:</label>
+                    <input type="text" name="adopt_city" class="form-control" value="{{logged_user.user_city}}">
+                    <label for="adopt_state">State:</label>
+                    <input type="text" name="adopt_state" class="form-control" value="{{logged_user.user_state}}">
+                    <label for="adopt_zipcode">Zip Code:</label>
+                    <input type="text" name="adopt_zipcode" class="form-control" value="{{logged_user.user_zipcode}}">
+                    <label for="home">Description of Home:</label>
+                    <textarea name="home" class="form-control"></textarea>
+                    <label for="other_pets">Do you have other pets at home?</label>
+                    <select id="other_pets" name="other_pets" class="form-control">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                    <label for="children">Do you have children at home?</label>
+                    <select id="children" name="children" class="form-control">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div> 
+                <div class="button_link">
+                    <button type="button" id="button_link" class="btn btn-light"><a href="/dashboard">Cancel</a></button>       
+                    <input class="btn btn-light" type="submit" value="Adopt Me!">
+                </div>
+                </form>
+            </div>
+        </div>
+</div>
+</body>
+</html>

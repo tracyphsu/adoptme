@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adopt Me</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <h4>Welcome {{ logged_user.first_name }}!</h4>
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/account">Account</a></li>
+                <li><a href="/add_pet">Add a Pet</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="adoption">
+                <h5>Adoption Status:</h5>
+                <table class="table table-striped table light">
+                    <thead>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for pet in adoptpet.all %}
+                            <td><a href="/pets/{{pet.id}}">{{ pet.name }}</a></td>
+                            <td>{{ pet.age }}</td>
+                            <td>{{ pet.pet_city }}, {{ pet.pet_state }}</td>
+                            <td>{{ pet.status }}</td>
+                    </tbody>
+                        {% endfor %}
+                    </table>
+            </div>
+            <div class="fav_pets">
+                <h5>Favorited Pets:</h5>
+                <table class="table table-striped table light">
+                    <thead>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for pet in logged_user.fav_pets.all %}
+                            <td><a href="/pets/{{pet.id}}">{{ pet.name }}</a></td>
+                            <td>{{ pet.age }}</td>
+                            <td>{{ pet.pet_city }}, {{ pet.pet_state }}</td>
+                            <td>{{ pet.status }}</td>
+                    </tbody>
+                        {% endfor %}
+                    </table>
+            </div>
+            <div class="added_pets">
+                <h5>Added Pets:</h5>
+                <table class="table table-striped table light">
+                    <thead>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for pet in logged_user.creator.all %}
+                            <td><a href="/pets/{{pet.id}}">{{ pet.name }}</a></td>
+                            <td>{{ pet.age }}</td>
+                            <td>{{ pet.pet_city }}, {{ pet.pet_state }}</td>
+                            <td>{{ pet.status }}</td>
+                    </tbody>
+                        {% endfor %}
+                    </table>
+            </div>
+    </div>
+
+</div>
+</body>
+</html>

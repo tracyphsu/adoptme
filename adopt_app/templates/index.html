@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adopt Me</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <div class="dashboard_container">
+        <div class="header">
+            <h1>Adopt Me!</h1>
+            <a href="/login">Login!</a>
+        </div>
+        <div class="content">
+            <h3>Sign up for an account!</h3>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message | safe }}
+            </div>
+            {% endfor %}
+            <form action="/register" method="POST">
+            {% csrf_token %}
+            <div class="form-group d-block container-fluid">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" class="form-control">
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name" class="form-control">
+                <label for="user_affiliation">Affiliation:</label>
+                <input type="text" name="user_affiliation" class="form-control">
+                <label for="user_email">Email:</label>
+                <input type="text" name="user_email" class="form-control">
+                <label for="user_address">Address:</label>
+                <input type="text" name="user_address" class="form-control">
+                <label for="user_city">City:</label> 
+                <input type="text" name="user_city" class="form-control">
+                <label for="user_state">State:</label>
+                <input type="text" name="user_state" class="form-control">
+                <label for="user_zipcode">Zip Code:</label>
+                <input type="text" name="user_zipcode" class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control">
+                <label for="confirm_pw">Confirm PW:</label>
+                <input type="password" name="confirm_pw" class="form-control">
+            </div>        
+            <input class="btn_login btn-light" type="submit" value="Register">
+        </form>
+        </div>
+    </div>
+</body>
+</html>

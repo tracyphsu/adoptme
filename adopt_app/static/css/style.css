@@ -1,0 +1,80 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Amatic SC', cursive;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: lightblue;
+}
+
+.header ul{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+.header a{
+    margin: 10px;
+    text-decoration: none;
+}
+
+.pet_content{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.content{
+    background-color: lightblue;
+}
+
+.btn{
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 3px 3px black;
+}
+
+.btn_login{
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 3px 3px black;
+    padding: 10px;
+    margin-left: 500px;
+}
+
+
+.title{
+    text-align: center;
+}
+
+.btn a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.messages{
+    color: red;
+}
+
+.pets p{
+    text-align: center;
+}
+
+.featured{
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 10px;
+    color: red;
+    padding: 10px;
+}
+
+.fav{
+    margin: 10px;
+}
